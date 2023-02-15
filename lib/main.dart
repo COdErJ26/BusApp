@@ -108,7 +108,6 @@ class _FrontScreenState extends State<FrontScreen> {
                     onPressed: (() {
                       setState(() {
                         display = false;
-                        
                       });
                     }),
                     child: Text("CLEAR")),
