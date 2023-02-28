@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'DistanceTime.dart';
+import 'countdowntimer.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -48,6 +49,7 @@ class _FrontScreenState extends State<FrontScreen> {
         title: const Text("Where to go"),
         centerTitle: true,
       ),
+      resizeToAvoidBottomInset: false,
       body: Container(
         alignment: Alignment.center,
         child: Column(
@@ -127,38 +129,45 @@ class _FrontScreenState extends State<FrontScreen> {
                   } else if (!snapshot.hasData) {
                     return Text('No Data Found');
                   } else {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: Container(
-                            width: 350,
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  leading: Icon(Icons.access_time),
-                                  title: Text(
-                                    'TIME: ${snapshot.data!.time}',
-                                    textScaleFactor: 1,
-                                  ),
-                                  subtitle: Text(
-                                    'DISTANCE: ${snapshot.data!.distance}',
-                                    textScaleFactor: 0.75,
-                                  ),
-                                  tileColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    side: BorderSide(
-                                      color: Colors.grey,
-                                      width: 1,
+                    return SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: Container(
+                              width: 350,
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    leading: Icon(Icons.access_time),
+                                    title: Text(
+                                      'TIME: ${snapshot.data!.time}',
+                                      textScaleFactor: 1,
                                     ),
-                                  ),
-                                )
-                              ],
+                                    subtitle: Text(
+                                      'DISTANCE: ${snapshot.data!.distance}',
+                                      textScaleFactor: 0.75,
+                                    ),
+                                    tileColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      side: BorderSide(
+                                        color: Colors.grey,
+                                        width: 1,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                          CountdownTimer(
+                            origin: 'Thuvakudi',
+                            destination: 'Nit,Trichy',
+                            apiKey: 'AIzaSyAkZEEYr7f9GW_63YQB6GuJA5rqnij7_JA',
+                          ),
+                        ],
+                      ),
                     );
                   }
                 },
